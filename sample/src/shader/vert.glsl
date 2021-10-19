@@ -1,7 +1,8 @@
 #version 300 es
 in vec4 vertexPosition;
-out vec2 coord;
+in vec4 color;
+out vec4 vertColor;
 void main(){
-    coord=vertexPosition.xy*.5+.5;
+    vertColor=color;
     gl_Position=vertexPosition;
 }

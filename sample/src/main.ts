@@ -8,8 +8,7 @@ const cSize = {
 type cSize = typeof cSize[keyof typeof cSize];
 
 const VERTEX_SIZE = 2; 
-const COLOR_SIZE = 4; 
-
+const COLOR_SIZE = 4;
 const main = () => {
     const canvas = document.createElement('canvas');
     canvas.width = cSize.width;
@@ -61,9 +60,6 @@ const main = () => {
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    //const colorBuffer = gl.createBuffer();
-    //const colorAttribLocation = gl.getAttribLocation(program, 'color');
-
     /*
     2___3
     |\  |
@@ -80,43 +76,36 @@ const main = () => {
         -1, 1,
         1,  1
     ]);
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+    // create color variable
+    const colorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    const colors = new Float32Array([
+        1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0, 1.0,
+        0.0, 0.0, 1.0, 1.0,
+        0.5, 0.5, 0.5, 1.0
+    ]);
 
 
     // Get and set vertex attribute
-    const vertexAttribLocation = gl.getAttribLocation(program, 'vertexPosition');
+    const vertexAttribLocation = gl.getAttribLocation(program, 'vertexPosition'); // get `in` variable in vertex shader
     gl.enableVertexAttribArray(vertexAttribLocation);
     gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0);
 
-    //gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    //gl.enableVertexAttribArray(colorAttribLocation);
-    //gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0);
+    const colorAttribLocation = gl.getAttribLocation(program, 'color');
+    gl.enableVertexAttribArray(colorAttribLocation);
+    gl.vertexAttribPointer(colorAttribLocation, COLOR_SIZE, gl.FLOAT, false, 0, 0);
 
-    
+    // Transfer data
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
 
-// 色情報。vec4で宣言してるのでrgbargbargba…と並べていきます。
-// すべて0.0〜1.0の範囲で指定します。
-// 頂点と同じ数だけ（今回は6つ）必要です。
-    /*
-const colors = new Float32Array([
-    1.0, 0.0, 0.0, 1.0,
-    0.0, 1.0, 0.0, 1.0,
-    0.0, 0.0, 1.0, 1.0,
-    0.0, 1.0, 0.0, 1.0,
-    0.0, 0.0, 0.0, 1.0,
-    0.0, 0.0, 1.0, 1.0
-]);
-*/
 
-    //gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    //gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
-    
     // Draw triangles
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, VERTEX_NUMS);
 
     gl.flush();
 }
-
-
 
 main();
