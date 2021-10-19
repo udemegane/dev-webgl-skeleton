@@ -1,14 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { type } = require("os");
 const path = require('path')
 
-module.exports = (env) => {
+module.exports = () => {
     return {
         mode: 'development',
-            entry: (typeof env === "undefined")? './' + env.name + '/src/main.ts': './src/main.ts',
+            entry: './src/main.ts',
                 output: {
             filename: 'bundle.js',
-                path: path.resolve(__dirname, (typeof env === "undefined")? 'dist-' + env.name : 'dist')
+                path: path.resolve(__dirname, 'dist')
         },
         module: {
             rules: [
