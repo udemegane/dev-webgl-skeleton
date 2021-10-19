@@ -4,8 +4,9 @@ const path = require('path')
 module.exports = () => {
     return {
         mode: 'development',
-            entry: './src/main.ts',
-                output: {
+        devtool: 'inline-source-map',
+        entry: './src/main.ts',
+        output: {
             filename: 'bundle.js',
                 path: path.resolve(__dirname, 'dist')
         },
