@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@types/gl-matrix": "^3.2.0",
+    "gl-matrix": "^3.4.3",
+    "html-webpack-plugin": "^5.4.0",
+    "ts-loader": "^9.2.6",
+    "ts-shader-loader": "^1.0.6",
+    "typescript": "^4.4.4",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1"
+  }
+}

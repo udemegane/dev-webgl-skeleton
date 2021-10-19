@@ -1,0 +1,53 @@
+import vertexShaderSource from './shader/vert.glsl'
+import fragmentShaderSource from './shader/flag.glsl'
+
+console.log('test')
+
+const main = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    document.body.appendChild(canvas);
+
+    const mayBeContext = canvas.getContext('webgl2') as WebGL2RenderingContext;
+    if (mayBeContext === null) {
+        console.warn('could not get context');
+        return
+    }
+    const gl: WebGL2RenderingContext = mayBeContext;
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertexShaderSource);
+    gl.compileShader(vertexShader);
+
+    const vertexShaderCompileStatus = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS);
+    if (!vertexShaderCompileStatus) {
+        const info = gl.getShaderInfoLog(vertexShader);
+        console.warn(info);
+    }
+
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShader, fragmentShaderSource);
+    gl.compileShader(fragmentShader);
+
+    const fragmentShaderCompileStatus = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS);
+    if (!fragmentShaderCompileStatus) {
+        const info = gl.getShaderInfoLog(fragmentShader);
+        console.warn(info);
+    }
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+
+    const linkStatus = gl.getProgramParameter(program, gl.LINK_STATUS);
+    if (!linkStatus) {
+        const info = gl.getProgramInfoLog(program);
+        console.warn(info);
+        return
+    }
+    gl.useProgram(program);
+}
+
+
+
