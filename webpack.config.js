@@ -11,7 +11,7 @@ module.exports = (env) => {
             filename: 'bundle.js',
             path: path.resolve(appDirectory, 'dist'),
             clean: true,
-            publicPath: '/',
+            publicPath: 'auto',
         },
         module: {
             rules: [
@@ -45,7 +45,7 @@ module.exports = (env) => {
             static: path.resolve(appDirectory, 'dist'),
             hot: true,
             devMiddleware: {
-                publicPath: '/',
+                publicPath: 'auto',
             }
         },
         plugins: [

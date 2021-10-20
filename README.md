@@ -13,26 +13,70 @@ https://www.npmjs.com
 ---
 ## Setup
 
+#### Package install
 Go to the repository root directory and initialize the project with the following command.
 
 ```
 npm install
 ```
 
-Pack the source code with the following command.
-
+#### Development
+You can build the project and also start the local server with the following command.
+The local server will default to port 8081 and can be accessed at http://localhost:8081.
 ```
 npm run build
+npm run start
+```
+Also, you are free to change the source and output programs as you see fit. For example, if you specify test_entry/src, it will look like this
+```
+npm run build -- --entry ./test_entry/src/main.ts -o test_entry_output
+npm run start -- --entry ./test_entry/src/main.ts -o test_entry_output
+```
+On the local server by webpack-dev-server, bundle files are placed in memory, so it will **do hot reload for changes** in the source program. For example, when you make any change to frag.glsl, **it will be reflected in real time on localhost:8081.**
+This makes development more efficient. Especially if you are using Vim.  
+
+
+If you want to change the server port, please change webpack.config.js and package.json.
+
+```package.json
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --port 8081",
+    "pack": "webpack --config webpack.inline.js"
+  },
+
 ```
 
-You can also specify an entry script file and an output directory, as in the following command.
+```webpack.config.js
+        devServer: {
+            host: "0.0.0.0",
+            port: 8081,
+            static: path.resolve(appDirectory, 'dist'),
+            hot: true,
+            devMiddleware: {
+                publicPath: 'auto',
+            }
+        },
+```
+
+#### Bundling source code for submit
+To make all the files into a single html file `index.html` for submitting assignments, use the following command.
+*Note that the html file output by this cannot be hot-reloaded on the local server because all the javascript and shader codes are inline extracted.*
+
+
+```
+npm run pack
+```
+
+As in development, the source code and output destination can be set arbitrarily.
 
 ```
 \\ test_entry_output directory will be created, and index.html will be output there.
-npm run build -- --entry ./test_entry/src/main.ts -o test_entry_output
+npm run pack -- --entry ./test_entry/src/main.ts -o test_entry_output
 ```
 
-You can change the meta-information in the generated html file webpack.config.js.
+You can change the meta-information in the generated html file webpack.inline.js.
+*Note: webpack.config.js is a configuration file for development, and entering a name and number here does not make sense.*
 ```
 meta: [
     {
