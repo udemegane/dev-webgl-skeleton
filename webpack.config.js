@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 const path = require('path')
 
 module.exports = () => {
@@ -8,7 +9,7 @@ module.exports = () => {
         entry: './src/main.ts',
         output: {
             filename: 'bundle.js',
-                path: path.resolve(__dirname, 'dist')
+            path: path.resolve(__dirname, 'dist')
         },
         module: {
             rules: [
@@ -29,11 +30,18 @@ module.exports = () => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                title: 'MyAppTitle',
+                title: 'ACG Homework',
                 meta: [
-                    { viewport: 'width=device-width, initial-scale=1' }
+                    {
+                        viewport: 'width=device-width, initial-scale=1',
+                        name: 'author',
+                        content: 'NAME (STUDENT ID)'
+                    }
                 ],
-            })
+                inlineSource: '.(glsl|ts|js|css)$',
+                minify: false,
+            }),
+            new HtmlInlineScriptPlugin()
         ]
     }
 };

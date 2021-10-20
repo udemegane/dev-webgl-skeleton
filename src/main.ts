@@ -89,4 +89,4 @@ const main = () => {
     gl.flush();
 }
 
-main();
+window.onload = main;
