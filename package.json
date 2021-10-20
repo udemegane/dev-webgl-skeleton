@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --port 8081"
+    "start": "webpack-dev-server --port 8081",
+    "pack": "webpack --config webpack.inline.js"
   },
   "dependencies": {
     "webpack-dev-server": "^4.3.1"

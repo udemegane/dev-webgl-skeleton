@@ -7,13 +7,13 @@ const appDirectory = fs.realpathSync(process.cwd());
 module.exports = (env) => {
     return {
         mode: 'development',
-        //devtool: 'inline-source-map',
+        devtool: 'inline-source-map',
         entry: path.resolve(appDirectory, 'src/main.ts'),
         output: {
             filename: 'bundle.js',
             path: path.resolve(appDirectory, 'dist'),
             clean: true,
-            publicPath: '/',
+            publicPath: 'auto',
         },
         module: {
             rules: [
@@ -47,7 +47,7 @@ module.exports = (env) => {
             static: path.resolve(appDirectory, 'dist'),
             hot: true,
             devMiddleware: {
-                publicPath: '/',
+                publicPath: 'auto',
             }
         },
         plugins: [
@@ -60,10 +60,10 @@ module.exports = (env) => {
                         content: 'NAME (STUDENT ID)'
                     }
                 ],
-                //inlineSource: '.(glsl|ts|js|css)$',
+                inlineSource: '.(glsl|ts|js|css)$',
                 minify: false,
             }),
-            //new HtmlInlineScriptPlugin()
+            new HtmlInlineScriptPlugin()
         ]
     }
 };
