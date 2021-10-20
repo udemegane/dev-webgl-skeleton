@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 const path = require('path')
 const fs = require("fs");
 const appDirectory = fs.realpathSync(process.cwd());
@@ -7,7 +6,6 @@ const appDirectory = fs.realpathSync(process.cwd());
 module.exports = (env) => {
     return {
         mode: 'development',
-        //devtool: 'inline-source-map',
         entry: path.resolve(appDirectory, 'src/main.ts'),
         output: {
             filename: 'bundle.js',
@@ -56,14 +54,10 @@ module.exports = (env) => {
                 meta: [
                     {
                         viewport: 'width=device-width, initial-scale=1',
-                        name: 'author',
-                        content: 'NAME (STUDENT ID)'
                     }
                 ],
-                //inlineSource: '.(glsl|ts|js|css)$',
                 minify: false,
             }),
-            //new HtmlInlineScriptPlugin()
         ]
     }
 };
