@@ -1,12 +1,18 @@
 import vertexShaderSource from './shader/vert.glsl'
 import fragmentShaderSource from './shader/flag.glsl'
 
-console.log('test')
+const cSize = {
+    width: 400,
+    height: 400,
+} as const;
+type cSize = typeof cSize[keyof typeof cSize];
+
+const VERTEX_SIZE = 2; 
 
 const main = () => {
     const canvas = document.createElement('canvas');
-    canvas.width = 500;
-    canvas.height = 500;
+    canvas.width = cSize.width;
+    canvas.height = cSize.height;
     document.body.appendChild(canvas);
 
     const mayBeContext = canvas.getContext('webgl2') as WebGL2RenderingContext;
@@ -23,6 +29,7 @@ const main = () => {
     if (!vertexShaderCompileStatus) {
         const info = gl.getShaderInfoLog(vertexShader);
         console.warn(info);
+        return
     }
 
     const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -33,6 +40,7 @@ const main = () => {
     if (!fragmentShaderCompileStatus) {
         const info = gl.getShaderInfoLog(fragmentShader);
         console.warn(info);
+        return
     }
 
     const program = gl.createProgram();
@@ -47,7 +55,38 @@ const main = () => {
         return
     }
     gl.useProgram(program);
+
+    // Clear screen
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    /*
+    2___3
+    |\  |
+    | \ |
+    |__\|
+    0   1
+   */
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    const VERTEX_NUMS = 4;
+    const vertices = new Float32Array([
+        -1, -1,
+        1, -1,
+        -1, 1,
+        1,  1
+    ]);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+    // Get and set vertex attribute
+    const vertexAttribLocation = gl.getAttribLocation(program, 'vertexPosition');
+    gl.enableVertexAttribArray(vertexAttribLocation);
+    gl.vertexAttribPointer(vertexAttribLocation, VERTEX_SIZE, gl.FLOAT, false, 0, 0);
+    
+    // Draw triangles
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, VERTEX_NUMS);
+
+    gl.flush();
 }
 
-
-
+window.onload = main;
