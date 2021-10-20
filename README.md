@@ -4,7 +4,7 @@ The original skeleton can be found below.
 https://esslab.jp/~ess/ja/teaching/2021/acg/notes/03_webgl/
 
 ## Advanced WebGL skeleton 
-This WebGL skeleton is designed to maximize the benefits of the editor and IDE, such as syntax highlighting, auto complete and so on, for efficient development. You can develop your project with separate programs like vert.glsl, frag.glsl, main.ts, and those separate files will be bundled into one html file `index.html` by webpack.  
+This WebGL skeleton is designed to maximize the benefits of the Editor and IDE (e.g. VSCode, Intellij IDEA), such as syntax highlighting, auto complete and so on, for efficient development. You can develop your project with separate programs like vert.glsl, frag.glsl, main.ts, and those separate files will be bundled into one html file `index.html` by webpack.  
 **This sample uses npm, so if you have never used npm before, please find out about npm and set up your environment.**  
 https://nodejs.org/en/  
 https://www.npmjs.com  
@@ -28,7 +28,7 @@ npm run build
 You can also specify an entry script file and an output directory, as in the following command.
 
 ```
-\\ dist-sample directory will be created, and bundle.js and index.html will be output there.
+\\ test_entry_output directory will be created, and index.html will be output there.
 npm run build -- --entry ./test_entry/src/main.ts -o test_entry_output
 ```
 
