@@ -41,15 +41,6 @@ module.exports = (env) => {
                 '.js'
             ]
         },
-        devServer: {
-            host: "0.0.0.0",
-            port: 8081,
-            static: path.resolve(appDirectory, 'dist'),
-            hot: true,
-            devMiddleware: {
-                publicPath: 'auto',
-            }
-        },
         plugins: [
             new HtmlWebpackPlugin({
                 title: 'ACG Homework',
