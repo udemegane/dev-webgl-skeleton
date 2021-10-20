@@ -63,3 +63,8 @@ If you want to import shader files, such as when creating complex shaders, you c
 *glslify*
  - 
  - https://github.com/glslify/glslify
+
+---
+**References**  
+I referred to the following article.  
+https://sbfl.net/blog/2016/09/04/webgl2-tutorial-basics/
