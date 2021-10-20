@@ -12,6 +12,10 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server --port 8081"
+  },
+  "dependencies": {
+    "webpack-dev-server": "^4.3.1"
   }
 }
