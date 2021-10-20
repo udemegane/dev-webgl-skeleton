@@ -13,14 +13,14 @@ https://www.npmjs.com
 ---
 ## Setup
 
-#### Package install
+### Package install
 Go to the repository root directory and initialize the project with the following command.
 
 ```
 npm install
 ```
 
-#### Development
+### Development
 You can build the project and also start the local server with the following command.
 The local server will default to port 8081 and can be accessed at http://localhost:8081.
 ```
@@ -59,8 +59,8 @@ If you want to change the server port, please change webpack.config.js and packa
         },
 ```
 
-#### Bundling source code for submit
-To make all the files into a single html file `index.html` for submitting assignments, use the following command.
+### Bundling source code for submit
+To make all the files into a single html file `index.html` for submitting assignments, use the following command.  
 *Note that the html file output by this cannot be hot-reloaded on the local server because all the javascript and shader codes are inline extracted.*
 
 
@@ -75,7 +75,7 @@ As in development, the source code and output destination can be set arbitrarily
 npm run pack -- --entry ./test_entry/src/main.ts -o test_entry_output
 ```
 
-You can change the meta-information in the generated html file webpack.inline.js.
+You can change the meta-information in the generated html file webpack.inline.js.  
 *Note: webpack.config.js is a configuration file for development, and entering a name and number here does not make sense.*
 ```
 meta: [
