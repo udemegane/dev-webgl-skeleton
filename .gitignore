@@ -3,6 +3,5 @@ dist/
 dist*/
 bundle.js
 index.html
-.gitmodules
 ACG
 setting.json

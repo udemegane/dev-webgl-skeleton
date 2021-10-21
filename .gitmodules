@@ -1,0 +1,6 @@
+[submodule "ACG"]
+	path = ACG
+	url = https://github.com/udemegane/ACG
+[submodule "advanced"]
+	path = advanced
+	url = https://github.com/udemegane/ACG_advanced_sample.git
