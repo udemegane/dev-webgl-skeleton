@@ -34,7 +34,7 @@ npm run start -- --entry ./test_entry/src/main.ts -o test_entry_output
 ```
 On the local server by webpack-dev-server, bundle files are placed in memory, so it will **do hot reload for changes** in the source program. For example, when you make any change to frag.glsl, **it will be reflected in real time on localhost:8081.**
 This makes development more efficient. Especially if you are using Vim.  
-
+You can shut down the server to press Ctrl+C.  
 
 If you want to change the server port, please change webpack.config.js and package.json.
 
