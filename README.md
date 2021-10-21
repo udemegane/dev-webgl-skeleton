@@ -12,7 +12,20 @@ https://www.npmjs.com
 
 ---
 ## Setup
+### Clone this repository
 
+```
+git clone https://github.com/udemegane/dev-webgl-skeleton.git
+```
+
+If you are using advanced samples, please clone them with the recursive option as follows
+```
+git clone --recursive https://github.com/udemegane/dev-webgl-skeleton.git
+```
+If you have already cloned the repository and later need the advanced sample, you can modify the repository as follows
+```
+git submodule update --init --recursive
+```
 ### Package install
 Go to the repository root directory and initialize the project with the following command.
 
@@ -20,7 +33,9 @@ Go to the repository root directory and initialize the project with the followin
 npm install
 ```
 
-### Development
+---
+## Development
+### Scripts for development
 You can build the project and also start the local server with the following command.
 The local server will default to port 8081 and can be accessed at http://localhost:8081.
 ```
@@ -40,14 +55,14 @@ If you want to change the server port, please change webpack.config.js and packa
 
 ```package.json
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --port 8081",
+    "build": "webpack --config webpack.dev.js",
+    "start": "webpack-dev-server --port 8081 --config webpack.dev.js",
     "pack": "webpack --config webpack.inline.js"
   },
 
 ```
 
-```webpack.config.js
+```webpack.dev.js
         devServer: {
             host: "0.0.0.0",
             port: 8081,
@@ -59,7 +74,18 @@ If you want to change the server port, please change webpack.config.js and packa
         },
 ```
 
-### Bundling source code for submit
+### Import and use multiple shader files.
+In this template, glslify is enabled, which allows you to load and use multiple .glsl files.  
+In the glslify_sample directory, there is an example of a split shader from the ACG: Ray Marching further notes (https://esslab.jp/~ess/ja/teaching/2021/acg/notes/08_raymarching/).   Separating the files in this way prevents the source code from getting bloated and also helps in development with more than one person.
+```
+```
+
+You can also use npm to install and use your own shader modules.  
+```
+```
+
+---
+## Bundling source code for submit
 To make all the files into a single html file `index.html` for submitting assignments, use the following command.  
 *Note that the html file output by this cannot be hot-reloaded on the local server because all the javascript and shader codes are inline extracted.*
 
@@ -76,8 +102,7 @@ npm run pack -- --entry ./test_entry/src/main.ts -o test_entry_output
 ```
 
 You can change the meta-information in the generated html file webpack.inline.js.  
-*Note: webpack.config.js is a configuration file for development, and entering a name and number here does not make sense.*
-```
+```webpack.inline.js
 meta: [
     {
         viewport: 'width=device-width, initial-scale=1',
@@ -86,6 +111,11 @@ meta: [
     }
         ],
 ```
+
+
+## Advanced Samples
+Work On Progress in .
+
 ---
 ## Optional
 You can use WebGL frameworks like three.js or babylon.js if you want. These can be installed with npm. Follow the official website for details.
@@ -100,13 +130,6 @@ You can use WebGL frameworks like three.js or babylon.js if you want. These can 
  - https://www.babylonjs.com
  - https://doc.babylonjs.com/divingDeeper/developWithBjs/npmSupport
   
-
-
-If you want to import shader files, such as when creating complex shaders, you can use the following system.
-
-*glslify*
- - 
- - https://github.com/glslify/glslify
 
 ---
 **References**  
