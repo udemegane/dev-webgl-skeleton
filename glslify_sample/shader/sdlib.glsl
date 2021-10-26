@@ -1,3 +1,5 @@
 precision mediump float;
-
-#pragma glslify:export(sdlib)
+float sdCircle(vec2 position, float r) {
+    return length(position) - r;
+}
+#pragma glslify:export(sdCircle)
