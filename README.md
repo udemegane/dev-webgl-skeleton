@@ -18,6 +18,8 @@ https://www.npmjs.com
 git clone https://github.com/udemegane/dev-webgl-skeleton.git
 ```
 
+*NOTE: Advanced samples are in preparation.*  
+
 If you are using advanced samples, please clone them with the recursive option as follows
 ```
 git clone --recursive https://github.com/udemegane/dev-webgl-skeleton.git
@@ -76,13 +78,22 @@ If you want to change the server port, please change webpack.config.js and packa
 
 ### Import and use multiple shader files.
 In this template, glslify is enabled, which allows you to load and use multiple .glsl files.  
-In the glslify_sample directory, there is an example of a split shader from the ACG: Ray Marching further notes (https://esslab.jp/~ess/ja/teaching/2021/acg/notes/08_raymarching/).   Separating the files in this way prevents the source code from getting bloated and also helps in development with more than one person.
+In the glslify_sample directory, there is an example of a split shader from `https://www.shadertoy.com/view/3ltSW2`.   Separating the files in this way prevents the source code from getting bloated and also helps in development with more than one person.   
+
+
+In order to use glslify, you need to prepare the following two things.   
+ - To import the shaders, add a line like the following As in the sample.
 ```
+#pragma glslify:FUNCTION_NAME=require(FILE_NAME)
+```
+ - To export the shaders, add the following line to the end of the file As in the sample.
+```
+#pragma glslify:export(FUNCTION_NAME)
 ```
 
-You can also use npm to install and use your own shader modules.  
-```
-```
+
+You can also use npm to import modules into your project. follow the official website for a detailed explanation of glslify.  
+https://github.com/glslify/glslify
 
 ---
 ## Bundling source code for submit
@@ -114,7 +125,7 @@ meta: [
 
 
 ## Advanced Samples
-Work On Progress in .
+Work In Progress.
 
 ---
 ## Optional
