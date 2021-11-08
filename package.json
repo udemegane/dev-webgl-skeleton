@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@tweakpane/core": "^1.0.6",
     "@types/gl-matrix": "^3.2.0",
     "gl-matrix": "^3.4.3",
     "glslify-loader": "^2.0.0",
@@ -8,6 +9,7 @@
     "raw-loader": "^4.0.2",
     "ts-loader": "^9.2.6",
     "ts-shader-loader": "^1.0.6",
+    "tweakpane": "^3.0.5",
     "typescript": "^4.4.4",
     "webpack": "^5.58.2",
     "webpack-cli": "^4.9.1",
