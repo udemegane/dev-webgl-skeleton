@@ -1,5 +1,8 @@
 {
   "devDependencies": {
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/inspector": "^4.2.0",
+    "@babylonjs/materials": "^4.2.0",
     "@types/gl-matrix": "^3.2.0",
     "gl-matrix": "^3.4.3",
     "glslify-loader": "^2.0.0",
