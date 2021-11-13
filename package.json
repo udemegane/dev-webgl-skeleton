@@ -1,5 +1,9 @@
 {
   "devDependencies": {
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/inspector": "^4.2.0",
+    "@babylonjs/materials": "^4.2.0",
+    "@tweakpane/core": "^1.0.6",
     "@types/gl-matrix": "^3.2.0",
     "gl-matrix": "^3.4.3",
     "glslify-loader": "^2.0.0",
@@ -19,6 +23,7 @@
     "pack": "webpack --config webpack.inline.js"
   },
   "dependencies": {
+    "tweakpane": "^3.0.5",
     "webpack-dev-server": "^4.3.1"
   }
 }
