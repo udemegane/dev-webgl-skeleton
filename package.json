@@ -5,11 +5,17 @@
     "@babylonjs/materials": "^4.2.0",
     "@tweakpane/core": "^1.0.6",
     "@types/gl-matrix": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-typescript": "^16.0.0",
+    "eslint-config-airbnb-typescript-prettier": "^4.2.0",
     "gl-matrix": "^3.4.3",
     "glsl-noise": "^0.0.0",
     "glslify-loader": "^2.0.0",
     "html-inline-script-webpack-plugin": "^2.0.2",
     "html-webpack-plugin": "^5.4.0",
+    "prettier": "^2.4.1",
     "raw-loader": "^4.0.2",
     "ts-loader": "^9.2.6",
     "ts-shader-loader": "^1.0.6",
@@ -19,9 +25,9 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "build": "webpack --config webpack.dev.js",
-    "start": "webpack-dev-server --port 8081 --config webpack.dev.js",
-    "pack": "webpack --config webpack.inline.js"
+    "build": "webpack --config webpack.dev.js --openssl-legacy-provider",
+    "start": "webpack-dev-server --port 8081 --config webpack.dev.js ",
+    "pack": "webpack --config webpack.inline.js --openssl-legacy-provider"
   },
   "dependencies": {
     "tweakpane": "^3.0.5",
