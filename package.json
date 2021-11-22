@@ -6,6 +6,7 @@
     "@tweakpane/core": "^1.0.6",
     "@types/gl-matrix": "^3.2.0",
     "gl-matrix": "^3.4.3",
+    "glsl-noise": "^0.0.0",
     "glslify-loader": "^2.0.0",
     "html-inline-script-webpack-plugin": "^2.0.2",
     "html-webpack-plugin": "^5.4.0",
