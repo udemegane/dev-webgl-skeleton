@@ -1,9 +1,9 @@
 root: true
-parser: "@typescript-eslint/parser"
+parser: '@typescript-eslint/parser'
 parserOptions:
-  project: "./tsconfig.json"
+  project: './tsconfig.json'
 plugins:
-  - "@typescript-eslint"
+  - '@typescript-eslint'
   - import
   - prettier
 extends:
@@ -15,5 +15,6 @@ extends:
 rules:
   prettier/prettier: error
   no-unused-vars: warn
-  "@typescript-eslint/no-unused-vars": warn
+  '@typescript-eslint/no-unused-vars': warn
   no-console: off
+  quotes: ['error', 'single']
