@@ -23,7 +23,7 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /.glsl$/,
+                test: /.(glsl|vs|fs)$/,
                 use: ['ts-shader-loader', 'glslify-loader'],
                 exclude: /node_modules/,
             }
