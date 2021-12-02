@@ -12,6 +12,7 @@
     "glsl-raytrace": "^1.0.0",
     "glsl-sdf-normal": "^1.0.0",
     "glsl-smooth-min": "^1.0.0",
+    "glsl-square-frame": "^1.0.1",
     "glslify-loader": "^2.0.0",
     "html-inline-script-webpack-plugin": "^2.0.2",
     "html-webpack-plugin": "^5.4.0",
