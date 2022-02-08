@@ -9,6 +9,7 @@ module.exports = {
         path: path.resolve(appDirectory, 'dist'),
         clean: true,
         publicPath: 'auto',
+        hashFunction: "xxhash64",
     },
     module: {
         rules: [
