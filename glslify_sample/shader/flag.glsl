@@ -1,6 +1,6 @@
 #version 300 es
-#pragma glslify:sdCircle=require('./sdlib.glsl')
-#pragma glslify:coloring_sdf=require('./util.glsl')
+#pragma glslify:sdCircle=require('./sdCircle.glsl')
+#pragma glslify:coloring_sdf=require('./coloring_sdf.glsl')
 
 precision mediump float;
 in vec2 coord;
