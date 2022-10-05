@@ -3,7 +3,7 @@ import { viteSingleFile } from 'vite-plugin-singlefile'
 import glsl from 'vite-plugin-glsl';
 
 export default defineConfig({
-  root: 'src',
+  root: 'another_sample',
   plugins: [
         viteSingleFile(),
         glsl()
