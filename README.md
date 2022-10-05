@@ -18,14 +18,7 @@ https://www.npmjs.com
 git clone https://github.com/udemegane/dev-webgl-skeleton.git
 ```
 
-If you are using advanced samples, please clone them with the recursive option as follows
-```
-git clone --recursive https://github.com/udemegane/dev-webgl-skeleton.git
-```
-If you have already cloned the repository and later need the advanced sample, you can modify the repository as follows
-```
-git submodule update --init --recursive
-```
+
 ### Package install
 Go to the repository root directory and initialize the project with the following command.
 
@@ -37,101 +30,31 @@ npm install
 ## Development
 ### Scripts for development
 You can build the project and also start the local server with the following command.
-The local server will default to port 8081 and can be accessed at http://localhost:8081.
+The local server will default to port 5173 and can be accessed at http://localhost:5173.
 ```
-npm run build
-npm run start
+npm run dev
 ```
-Also, you are free to change the source and output programs as you see fit. For example, if you specify test_entry/src, it will look like this
+or
 ```
-npm run build -- --entry ./test_entry/src/main.ts -o test_entry_output
-npm run start -- --entry ./test_entry/src/main.ts -o test_entry_output
+npx vite dev
 ```
-On the local server by webpack-dev-server, bundle files are placed in memory, so it will **do hot reload for changes** in the source program. For example, when you make any change to frag.glsl, **it will be reflected in real time on localhost:8081.**
-This makes development more efficient. Especially if you are using Vim.  
-You can shut down the server to press Ctrl+C.  
-
-If you want to change the server port, please change webpack.config.js and package.json.
-
-```package.json
-  "scripts": {
-    "build": "webpack --config webpack.dev.js",
-    "start": "webpack-dev-server --port 8081 --config webpack.dev.js",
-    "pack": "webpack --config webpack.inline.js"
-  },
-
+Also, you can change the source and output programs as you see fit. For example, if you use a different config file for the directory "./another_sample".
+Chekc the contents of "vite.config2.js".
 ```
-
-```webpack.dev.js
-        devServer: {
-            host: "0.0.0.0",
-            port: 8081,
-            static: path.resolve(appDirectory, 'dist'),
-            hot: true,
-            devMiddleware: {
-                publicPath: 'auto',
-            }
-        },
-```
-
-### Import and use multiple shader files.
-In this template, glslify is enabled, which allows you to load and use multiple .glsl files.  
-In the glslify_sample directory, there is an example of a split shader from the ACG: Ray Marching further notes (https://esslab.jp/~ess/ja/teaching/2021/acg/notes/08_raymarching/).   Separating the files in this way prevents the source code from getting bloated and also helps in development with more than one person.
-```
-```
-
-You can also use npm to install and use your own shader modules.  
-```
+npx vite --config vite.config2.js
 ```
 
 ---
 ## Bundling source code for submit
 To make all the files into a single html file `index.html` for submitting assignments, use the following command.  
+A "dist" will be created in the directory containing index.html.
 *Note that the html file output by this cannot be hot-reloaded on the local server because all the javascript and shader codes are inline extracted.*
 
 
 ```
-npm run pack
+npx vite build
 ```
-
-As in development, the source code and output destination can be set arbitrarily.
-
+As in the previous example, you can choose a config file.
 ```
-\\ test_entry_output directory will be created, and index.html will be output there.
-npm run pack -- --entry ./test_entry/src/main.ts -o test_entry_output
+npx vite build --config vite.config2.js
 ```
-
-You can change the meta-information in the generated html file webpack.inline.js.  
-```webpack.inline.js
-meta: [
-    {
-        viewport: 'width=device-width, initial-scale=1',
-        name: 'author',
-        content: 'NAME (STUDENT ID)'
-    }
-        ],
-```
-
-
-## Advanced Samples
-Work On Progress in .
-
----
-## Optional
-You can use WebGL frameworks like three.js or babylon.js if you want. These can be installed with npm. Follow the official website for details.
-
-*three.js*
- - 
- - https://threejs.org
- - https://threejs.org/docs/#manual/en/introduction/Installation
-
-*babylon.js*
- -
- - https://www.babylonjs.com
- - https://doc.babylonjs.com/divingDeeper/developWithBjs/npmSupport
-  
-
----
-**References**  
-I referred to the following article.  
-https://sbfl.net/blog/2016/09/04/webgl2-tutorial-basics/

@@ -11,6 +11,5 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     assetsInlineLimit: 100000000,
-    outDir: '../dist'
   }
 })
