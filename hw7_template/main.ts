@@ -7,7 +7,13 @@ const cSize = {
   height: 500,
 } as const;
 // type cSize = typeof cSize[keyof typeof cSize];
-
+export const assertIsDefined: <T>(val: T) => asserts val is NonNullable<T> = <T>(
+  val: T
+): asserts val is NonNullable<T> => {
+  if (val === undefined || val === null) {
+    throw new Error(`Expected 'val' to be defined, but received ${val}`);
+  }
+};
 type _AttribHelper = {
   Location: number;
   VBO: WebGLBuffer;
@@ -45,21 +51,18 @@ const setParamUI = () => {
     return Params;
 }
 */
-const webglInit = (w: number, h: number): WebGL2RenderingContext => {
+const initialize = (w: number, h: number): WebGL2RenderingContext => {
   const canvas = document.createElement('canvas');
   canvas.width = w;
   canvas.height = h;
   document.body.appendChild(canvas);
 
   const mayBeContext = canvas.getContext('webgl2') as WebGL2RenderingContext;
-  if (mayBeContext === null) {
-    console.warn('could not get context');
-    return;
-  }
+  assertIsDefined(mayBeContext);
   const gl: WebGL2RenderingContext = mayBeContext;
   // Clear screen
-  gl.clearColor(0, 0, 0, 0);
-  gl.clearDepth(1.0);
+  gl.clearColor(0, 0, 0, 0.5);
+  //gl.clearDepth(1.0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   return gl;
 };
@@ -70,33 +73,28 @@ const getShaderProgram = (
   fragmentShaderSource: string
 ): WebGLProgram => {
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+  assertIsDefined(vertexShader);
   gl.shaderSource(vertexShader, vertexShaderSource);
   gl.compileShader(vertexShader);
 
-  const vertexShaderCompileStatus = gl.getShaderParameter(
-    vertexShader,
-    gl.COMPILE_STATUS
-  );
-  if (!vertexShaderCompileStatus) {
+  if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
     const info = gl.getShaderInfoLog(vertexShader);
-    console.warn(info);
-    return;
+    assertIsDefined(info);
+    throw new Error(info);
   }
 
   const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+  assertIsDefined(fragmentShader);
   gl.shaderSource(fragmentShader, fragmentShaderSource);
   gl.compileShader(fragmentShader);
 
-  const fragmentShaderCompileStatus = gl.getShaderParameter(
-    fragmentShader,
-    gl.COMPILE_STATUS
-  );
-  if (!fragmentShaderCompileStatus) {
+  if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
     const info = gl.getShaderInfoLog(fragmentShader);
-    console.warn(info);
-    return;
+    assertIsDefined(info);
+    throw new Error(info);
   }
   const program = gl.createProgram();
+  assertIsDefined(program);
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
   gl.linkProgram(program);
@@ -104,19 +102,15 @@ const getShaderProgram = (
   const linkStatus = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linkStatus) {
     const info = gl.getProgramInfoLog(program);
-    console.warn(info);
-    return;
+    assertIsDefined(info);
+    throw new Error(info);
   }
   return program;
 };
 
 const main = () => {
-  const gl: WebGL2RenderingContext = webglInit(cSize.width, cSize.height);
-  const Program = getShaderProgram(
-    gl,
-    vertexShaderSource,
-    fragmentShaderSource
-  );
+  const gl: WebGL2RenderingContext = initialize(cSize.width, cSize.height);
+  const Program = getShaderProgram(gl, vertexShaderSource, fragmentShaderSource);
   gl.useProgram(Program);
 
   const createVbo = (vertices: Float32Array) => {
@@ -131,14 +125,7 @@ const main = () => {
     (Object.keys(attrib) as (keyof VertsAttrib)[]).forEach((key) => {
       gl.bindBuffer(gl.ARRAY_BUFFER, attrib[key].VBO);
       gl.enableVertexAttribArray(attrib[key].Location);
-      gl.vertexAttribPointer(
-        attrib[key].Location,
-        attrib[key].AttrSize,
-        gl.FLOAT,
-        false,
-        0,
-        0
-      );
+      gl.vertexAttribPointer(attrib[key].Location, attrib[key].AttrSize, gl.FLOAT, false, 0, 0);
       gl.bindBuffer(gl.ARRAY_BUFFER, null);
     });
   };
@@ -223,24 +210,22 @@ const main = () => {
     -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0,
   ]);
   const cubeColor = new Float32Array([
-    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9,
-    1.0,
+    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0,
 
-    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9,
-    1.0,
+    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0,
 
-    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9,
-    1.0,
+    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0,
 
-    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9,
-    1.0,
+    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0,
 
-    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9,
-    1.0,
+    0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0, 0.2, 0.6, 0.9, 1.0,
   ]);
   const cubePosVbo = createVbo(vertices);
+  assertIsDefined(cubePosVbo);
   const cubeNormalVbo = createVbo(normals);
+  assertIsDefined(cubeNormalVbo);
   const cubeColorVbo = createVbo(cubeColor);
+  assertIsDefined(cubeColorVbo);
   const cubeVertexAttrib: VertsAttrib = {
     Position: {
       Location: gl.getAttribLocation(Program, 'vertexPosition'),
@@ -272,7 +257,7 @@ const main = () => {
   gl.uniform3f(offsetLoc, Params.offset.x, Params.offset.y, Params.offset.z);
   gl.uniform1f(angleLoc, Params.angle);
   // eslint-disable-next-line camelcase
-  const render = (ms_since_page_loaded) => {
+  const render = (ms_since_page_loaded: number) => {
     gl.useProgram(Program);
     // eslint-disable-next-line camelcase
     gl.uniform1f(u_time_loc, ms_since_page_loaded * 0.001 * Params.speed);
