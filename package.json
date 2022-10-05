@@ -1,26 +1,20 @@
 {
-  "devDependencies": {
-    "@tweakpane/core": "^1.0.6",
-    "@types/gl-matrix": "^3.2.0",
-    "gl-matrix": "^3.4.3",
-    "glslify-loader": "^2.0.0",
-    "html-inline-script-webpack-plugin": "^2.0.2",
-    "html-webpack-plugin": "^5.4.0",
-    "raw-loader": "^4.0.2",
-    "ts-loader": "^9.2.6",
-    "ts-shader-loader": "^1.0.6",
-    "tweakpane": "^3.0.5",
-    "typescript": "^4.4.4",
-    "webpack": "^5.58.2",
-    "webpack-cli": "^4.9.1",
-    "webpack-merge": "^5.8.0"
-  },
+  "name": "dev-webgl-skeleton",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "webpack --config webpack.dev.js",
-    "start": "webpack-dev-server --port 8081 --config webpack.dev.js",
-    "pack": "webpack --config webpack.inline.js"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "dependencies": {
-    "webpack-dev-server": "^4.3.1"
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-plugin-glsl": "^0.4.0",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-singlefile": "^0.12.2"
   }
 }
