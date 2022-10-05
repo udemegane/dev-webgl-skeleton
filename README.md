@@ -4,8 +4,8 @@ The original skeleton can be found below.
 https://esslab.jp/~ess/ja/teaching/2021/acg/notes/03_webgl/
 
 ## Advanced WebGL skeleton 
-This WebGL skeleton is designed to maximize the benefits of the Editor and IDE (e.g. VSCode, Intellij IDEA), such as syntax highlighting, auto complete and so on, for efficient development. You can develop your project with separate programs like vert.glsl, frag.glsl, main.ts, and those separate files will be bundled into one html file `index.html` by webpack.  
-**This sample uses npm, so if you have never used npm before, please find out about npm and set up your environment.**  
+This WebGL skeleton is to get benefits of the Editor or IDE (e.g. VSCode, Intellij IDEA), such as syntax highlighting, auto complete and so on, for efficient development. You can develop your project with separate programs like vert.glsl, frag.glsl, main.ts, and those separate files will be bundled into one html file `index.html` by vite.  
+**This sample uses nodejs, so if you have never used nodejs before, please find out about nodejs and set up your environment.**  
 https://nodejs.org/en/  
 https://www.npmjs.com  
 
