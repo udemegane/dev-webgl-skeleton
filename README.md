@@ -58,3 +58,14 @@ As in the previous example, you can choose a config file.
 ```
 npx vite build --config vite.config2.js
 ```
+
+## Validate your shader
+Writing glsl shader code without developer tools will probably create a large number of bugs and cause you a lot of pain.
+It is strongly recommended that the following glsl developer tools be installed in your environment.
+- https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/
+- https://github.com/KhronosGroup/glslang
+
+If you are using vscode, the combination of the following extensions and the development tools above will make you very comfortable.
+
+- https://marketplace.visualstudio.com/items?itemName=mrjjot.vscode-glsl-linter
+- https://marketplace.visualstudio.com/items?itemName=dtoplak.vscode-glsllint
