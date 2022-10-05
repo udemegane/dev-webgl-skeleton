@@ -1,11 +1,22 @@
-import vertexShaderSource from './shader/vert.glsl';
+import vertexShaderSource from './shader/verts.glsl';
 import fragmentShaderSource from './shader/flag.glsl';
 
 const cSize = {
-  width: 400,
-  height: 400,
+  width: 600,
+  height: 600,
 } as const;
-// type cSize = typeof cSize[keyof typeof cSize];
+
+type cSize = typeof cSize[keyof typeof cSize];
+
+export const assertIsDefined: <T>(val: T) => asserts val is NonNullable<T> = <
+  T
+>(
+  val: T
+): asserts val is NonNullable<T> => {
+  if (val === undefined || val === null) {
+    throw new Error(`Expected 'val' to be defined, but received ${val}`);
+  }
+};
 
 const VERTEX_SIZE = 2;
 
@@ -15,13 +26,11 @@ const main = () => {
   canvas.height = cSize.height;
   document.body.appendChild(canvas);
 
-  const mayBeContext = canvas.getContext('webgl2') as WebGL2RenderingContext;
-  if (mayBeContext === null) {
-    console.warn('could not get context');
-    return;
-  }
-  const gl: WebGL2RenderingContext = mayBeContext;
+  const gl = canvas.getContext('webgl2');
+  assertIsDefined(gl);
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+  assertIsDefined(vertexShader);
+
   gl.shaderSource(vertexShader, vertexShaderSource);
   gl.compileShader(vertexShader);
 
@@ -36,6 +45,7 @@ const main = () => {
   }
 
   const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+  assertIsDefined(fragmentShader);
   gl.shaderSource(fragmentShader, fragmentShaderSource);
   gl.compileShader(fragmentShader);
 
@@ -45,11 +55,12 @@ const main = () => {
   );
   if (!fragmentShaderCompileStatus) {
     const info = gl.getShaderInfoLog(fragmentShader);
-    console.warn(info);
-    return;
+    assertIsDefined(info);
+    throw new Error(info);
   }
 
   const program = gl.createProgram();
+  assertIsDefined(program);
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
   gl.linkProgram(program);
@@ -57,8 +68,8 @@ const main = () => {
   const linkStatus = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linkStatus) {
     const info = gl.getProgramInfoLog(program);
-    console.warn(info);
-    return;
+    assertIsDefined(info);
+    throw new Error(info);
   }
   gl.useProgram(program);
 
